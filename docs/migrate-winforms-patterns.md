@@ -2,7 +2,7 @@
 title: WinForms patterns and their WinUI 3 equivalents
 description: A pattern mapping guide for developers migrating Windows Forms apps to WinUI 3, with control, data binding, and lifecycle equivalents.
 ms.topic: concept
-ms.date: 07/29/2026
+ms.date: 07/27/2026
 author: GrantMeStrength
 ms.author: jken
 ---
@@ -12,24 +12,9 @@ ms.author: jken
 > [!NOTE]
 > This article is a **first-draft stub** for SME review. Sections marked `> [!TODO]` require technical validation before publication. This article is a companion to [WPF patterns and their WinUI 3 equivalents](../../windows-app-sdk/migrate-to-windows-app-sdk/wpf-patterns-winui3.md).
 
-Windows Forms (WinForms) developers moving to WinUI 3 will find some familiar concepts — event-driven programming and .NET — alongside important differences in UI composition, data binding, and application lifecycle.
+Windows Forms (WinForms) developers migrating to WinUI 3 will find some familiar concepts — XAML-based layout, event-driven programming, and .NET — alongside important differences in UI composition, data binding, and application lifecycle.
 
-> [!NOTE]
-> You don't need to rewrite a working WinForms or WPF app. Existing apps remain fully supported, and continuing to maintain them is a valid choice. This guidance is for two situations: **re-skilling** WinForms developers who are building *new* projects in WinUI, and **adding WinUI to an existing app** through interop where a specific new capability adds value.
-
-For LOB apps, WinUI brings capabilities that are harder to reach from WinForms:
-
-- **Fluent Design and modern theming** — built-in light/dark themes, system accent color, and Mica/Acrylic materials.
-- **`WebView2`** — an inbox control that hosts the Microsoft Edge (Chromium) engine for rich web content and interop.
-- **Modern DPI and rendering** — WinUI 3 renders on the modern Windows composition stack.
-- **Windows App SDK APIs** — access to current Windows platform features through a single SDK.
-- **On-device AI** — integrate models such as Phi Silica on Copilot+ PCs. See [Add AI capabilities to a line-of-business WinUI app](ai-for-lob-apps.md).
-
-> [!TODO] SME validation: confirm the specific, current-release advantages to claim here (for example, exact DPI/rendering behavior and Windows App SDK feature set) so this list stays accurate and doesn't overstate parity or gaps.
-
-This article maps common WinForms patterns to their WinUI 3 equivalents so you can apply familiar concepts when building new WinUI screens. Use it alongside the [Migration decision guide](../../windows-app-sdk/migrate-to-windows-app-sdk/migration-decision-guide.md) to understand the scope of any migration.
-
-> [!TODO] SME: confirm the current recommended approach for hosting WinUI 3 UI inside an existing WinForms or WPF app (the XAML interop story) and link the authoritative guidance. Do not assert a specific API here until validated.
+This article maps common WinForms patterns to their WinUI 3 equivalents. Use it alongside the [Migration decision guide](../../windows-app-sdk/migrate-to-windows-app-sdk/migration-decision-guide.md) to understand the scope of a migration.
 
 ## Overview
 
@@ -37,16 +22,14 @@ WinForms uses a code-first, designer-driven model where controls are defined in 
 
 The most significant differences for WinForms developers are:
 
-- **No drag-and-drop XAML designer.** WinUI 3 does not have an interactive visual designer comparable to the WinForms designer. UI is authored in XAML markup directly, often with a live preview.
+- **No drag-and-drop visual designer.** WinUI 3 does not have an interactive visual designer comparable to the WinForms designer. UI is authored in XAML markup directly, often with a live preview.
 - **Data binding replaces code-behind data wiring.** WinUI 3 uses compiled bindings (`x:Bind`) or classic bindings (`Binding`) rather than manually assigning values in event handlers.
 - **MVVM is the dominant pattern.** Business logic in WinUI 3 apps is typically separated into ViewModels, following the Model-View-ViewModel (MVVM) pattern.
 - **Application lifecycle differs.** WinUI 3 desktop apps use `App.xaml.cs` and `Window` rather than `Application.Run` and `Form`.
 
 > [!TODO] SME validation: confirm accuracy of the above summary. In particular, confirm the current state of XAML designer support in Visual Studio for WinUI 3 projects (Hot Reload and live preview status as of the current stable release).
 
-## Control equivalents for new WinUI screens and bridging
-
-Use this table when building new WinUI screens or bridging an existing app: it maps familiar WinForms controls and patterns to their WinUI 3 equivalents.
+## Pattern mapping table
 
 > [!TODO] Complete the table below. Each row should be reviewed by an SME familiar with both WinForms and WinUI 3. Add rows for additional patterns as identified during SME review.
 
